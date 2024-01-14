@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import styles from "./page.module.css";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   description: "Board game for 10-18 players.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className={styles.main}>{children}</main>
+        <main className={styles.main}>
+          <SessionProvider>{children}</SessionProvider>
+        </main>
       </body>
     </html>
   );

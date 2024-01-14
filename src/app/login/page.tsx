@@ -1,24 +1,13 @@
 "use client";
 
+import { LoginFormSchemaType } from "@/types";
+import { LoginFormSchema } from "@/zodSchemas/login";
 import { useFormState } from "react-dom";
-import { z } from "zod";
 
-interface LoginFormSchemaType {
-  email: string;
-  password: string;
-}
-
-const LoginFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
-
-async function authenticate(
+export async function authenticate(
   prevState: LoginFormSchemaType,
   formData: FormData
 ): Promise<LoginFormSchemaType> {
-  console.log("formData", formData);
-
   const parsedLoginData = LoginFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -53,6 +42,7 @@ export default function Login() {
       <input type="email" name="email" id="email" />
       <label htmlFor="password">password</label>
       <input type="password" name="password" id="password" />
+      <button type="submit">Login</button>
     </form>
   );
 }
