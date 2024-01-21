@@ -1,0 +1,28 @@
+.header {
+    background-color: white;
+    padding: 0 24px;
+    opacity: initial;
+    border-bottom: 1px solid #dcdce5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: gold;
+    padding: 10px 0;
+}
+
+.header .header__user {
+   display: flex;
+   align-items: center;
+}
+
+.header .header__user :last-child {
+    margin-left: 20px;
+ }
