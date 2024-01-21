@@ -1,3 +1,4 @@
+import { Header } from "@/Widgets/Header";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
@@ -20,7 +21,10 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className={styles.main}>
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            <Header />
+            {children}
+          </SessionProvider>
         </main>
       </body>
     </html>
