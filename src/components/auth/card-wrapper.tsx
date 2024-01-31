@@ -1,6 +1,7 @@
+import { BackButton } from "@/components/auth/back-button";
 import { AuthHeader } from "@/components/auth/header";
 import { Social } from "@/components/auth/social";
-import { Card, CardContent, CardFooter, CardHeader } from "./card";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 
 interface Props {
   children: React.ReactNode;
@@ -29,7 +30,7 @@ export const CardWrapper: React.FC<Props> = ({
         </CardFooter>
       )}
       <CardFooter>
-        {/* <BackButton label={backButtonLabel} href={backButtonHref} /> */}
+        <BackButton label={backButtonLabel} href={backButtonHref} />
       </CardFooter>
     </Card>
   );

@@ -1,7 +1,7 @@
 "use client";
 
+import { LoginFormSchema } from "@/schemas/login";
 import { LoginFormSchemaType } from "@/types";
-import { LoginFormSchema } from "@/zodSchemas/login";
 import { useFormState } from "react-dom";
 
 export async function authenticate(
