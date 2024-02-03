@@ -1,25 +1,28 @@
-import NextAuth from "next-auth";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import { authConfig } from "./auth.config";
+import { auth } from "./auth";
 
-export default NextAuth(authConfig).auth;
+export default auth((req) => {
+  console.log("middleware", !!req.auth);
 
-export function middleware(req: NextRequest) {
-  console.log("req", req);
-  return NextResponse;
-}
+  const objWithEmptyAncestor = new Proxy(
+    {},
+    {
+      get(obj, prop, receiver) {
+        if (prop in obj) {
+          return obj[prop];
+        }
+        obj[prop] = {};
+
+        return Reflect.get(obj, prop, receiver);
+      },
+    }
+  );
+
+  objWithEmptyAncestor.a.b = 1;
+  objWithEmptyAncestor.a.c = 1;
+
+  console.log("objWithEmptyAncestor", objWithEmptyAncestor);
+});
 
 export const config = {
-  /*
-   * Match all request paths except for the ones starting with:
-   * - api (API routes)
-   * - _next/static (static files)
-   * - _next/image (image optimization files)
-   * - favicon.ico (favicon file)
-   */
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-    "/game/:path*",
-  ],
+  matcher: ["/auth/login"],
 };
