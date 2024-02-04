@@ -1,7 +1,7 @@
+import { AppHeader } from "@/widgets/header";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
-import { AppHeader } from "../widgets/header";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="h-full w-full bg-gradient-to-r from-cyan-500 to-blue-500">
+        <main className="h-full w-full bg-gradient-to-r from-cyan-500 to-blue-500 pt-16">
           <SessionProvider>
             <AppHeader />
             {children}
