@@ -7,11 +7,12 @@ import {
 } from "./routes";
 
 export default auth((req) => {
+  const { nextUrl } = req;
   const isAuthenticated = !!req.auth;
 
-  const isApiRoute = req.nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(req.nextUrl.pathname);
-  const isAuthRoute = authRoutes.includes(req.nextUrl.pathname);
+  const isApiRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   if (isApiRoute) {
     return null;
@@ -25,15 +26,13 @@ export default auth((req) => {
     return null;
   }
 
-  console.log("req.nextUrl", req.nextUrl);
-
   if (!isAuthenticated && !isPublicRoute) {
-    return Response.redirect(new URL("/auth/login", req.nextUrl.origin));
+    return Response.redirect(new URL("/auth/login", nextUrl));
   }
 
   return null;
 });
 
 export const config = {
-  matcher: ["/:path*"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
